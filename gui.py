@@ -15,7 +15,7 @@ class mainWindow(PyQt4.QtGui.QMainWindow, Ui_MainWindow):
 	    self.setupUi(self)
 	    self.apiId = "4509481"
 	    self.userId = False
-	    self.token = Fxalse
+	    self.token = False
 	    self.expires = 0
 
 	    self.textMsg.setText('Enter message..')

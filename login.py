@@ -23,7 +23,7 @@ class loginDialog(QtGui.QDialog, Ui_LoginDialog):
 		self.webView.setGeometry(6, 6, 800, 400)
 		self.webView.setObjectName("webView")
 		self.webView.connect(self.webView, QtCore.SIGNAL("urlChanged(const QUrl&)"), self.evurlChanged)
-		self.webView.load(QUrl("""https://oauth.vk.com/authorize?client_id=4509481&scope=friends,messages&
+		self.webView.load(QUrl("""https://oauth.vk.com/authorize?client_id=4509481&scope=4096&
             redirect_uri=http://oauth.vk.com/blank.html&display=popup&response_type=token"""))
 
 	def closeLoginDialog(self):
@@ -44,6 +44,7 @@ class loginDialog(QtGui.QDialog, Ui_LoginDialog):
 		self.parent.expires = time.time() + int(session["expires_in"])
 		self.parent.userId = session[u"user_id"]
 		self.parent.token = session[u"https://oauth.vk.com/blank.html#access_token"]
+		
 
 		self.closeLoginDialog()
 

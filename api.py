@@ -21,20 +21,28 @@
 import simplejson as json
 from PyQt4 import QtGui
 import urllib2
+import urllib
 import api_exception
+import config
 
 class Api(object):
     def __init__(self):
-        pass
+        self.userId, self.token, self.playlist, self.expires = config.loadSession()
 
     def method(self, method, **kwargs):
         try:
+            data = {
+                'access_token': self.token,
+                'uid': self.userId
+            }
             url = "https://api.vk.com/method/"+ method
             params = ''
             for i in kwargs:
                 params += "&" + i + '=' + kwargs[i]
-            url = url  + '?' + params[1:]
-            return json.loads(urllib2.urlopen(url).read())["response"]
+            url = url  + '?' + params[1:] + "/access_token=" + str(self.token)
+            resp = urllib2.urlopen(url, urllib.urlencode(data))
+            return json.loads(resp.read())
+            #return json.loads(urllib2.urlopen(url).read())["response"]
         except api_exception.MethodErr, e:
             msg = QtGui.QMessageBox(self)
             msg.setText(e.error_msg+'\n'+str(e.request_params))

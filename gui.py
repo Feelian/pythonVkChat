@@ -15,7 +15,7 @@ class mainWindow(PyQt4.QtGui.QMainWindow, Ui_MainWindow):
 	    self.setupUi(self)
 	    self.apiId = "4509481"
 	    self.userId = False
-	    self.token = False
+	    self.token = Fxalse
 	    self.expires = 0
 
 	    self.textMsg.setText('Enter message..')
@@ -41,3 +41,4 @@ class mainWindow(PyQt4.QtGui.QMainWindow, Ui_MainWindow):
     def getDial(self):
         method = 'messages.getDialogs'
         msg = self.vk.method(method, uid=self.userId, access_toke=self.token, count="1")
+        print msg
